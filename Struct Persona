@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+struct datos{
+string nombre; 
+int edad;
+float nota;
+}p[100];
+
+int main() {
+  setlocale(LC_CTYPE, "Spanish");
+  int n=0;
+  cout << "Digite el numero de personas a ingresar"<< endl;
+  cin>>n;
+  for (int i = 0; i<n;i++){
+
+    cout << "Ingrese el nombre, edad y nota de la persona: \n";
+    cin>>p[i].nombre;
+    cin>>p[i].edad;
+    cin>>p[i].nota;
+  }
+}
