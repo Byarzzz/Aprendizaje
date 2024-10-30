@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+class Persona
+{
+private:
+string nombre;
+int edad;
+public:
+Persona(string,int);
+virtual void mostrar();
+};
+
+Persona::Persona(string n,int e)
+{nombre=n;edad=e;}
+
+void Persona::mostrar()
+{cout<<"Mi nombre es "<<nombre<<" y mi edad es "<<edad<<endl;}
+
+class Alumno : public Persona
+{
+private:
+string asignatura;
+float nota;
+public:
+Alumno(string,int,string,float);
+void mostrar();
+};
+
+Alumno::Alumno(string n,int e,string a, float c) : Persona(n,e)
+{asignatura=a; nota=c;}
+
+void Alumno::mostrar()
+{cout<<"Mi asginatura es : "<<asignatura <<" y mi nota es: "<<nota<<endl;}
+
+class Profesor : public Persona
+{
+private://
+string materia;
+public:
+Profesor(string,int,string);
+void mostrar();
+};
+Profesor::Profesor(string n, int e,string m): Persona(n,e)
+{materia=m;}
+void Profesor::mostrar()
+{Persona::mostrar();
+cout<<"Mi especialidad es la materia de "<<materia<<endl;}
+
+int main() {
+  Alumno a("jorge",21,"Quimica",6.1);
+  a.mostrar();
+  Alumno b("Alicia",17,"Fisica",6.7);
+  Profesor p("Maximo",67,"Algebra");
+  p.mostrar();
+  return 0;
+}
