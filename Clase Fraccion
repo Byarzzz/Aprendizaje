@@ -1,0 +1,212 @@
+/*Main.cpp 
+
+#include <iostream>
+#include "Fraccion.h"// Comando que mediante a el llamamos a la Clase Fraccion y su funciones y variables 
+using namespace std;
+
+struct Nodo//Estructura para crear nuestro nodo 
+{
+Fraccion info;
+struct Nodo *link;
+};
+
+typedef Nodo *Lista;
+void agregar(Lista &z)//Creacion de un nodo
+{
+  Fraccion F;
+  int nu,deaux,de;// Variable donde vamos a aguardar el numerador y denominador
+  cout<<"Ingrese su numerado de la Fraccion"<<endl;
+  cin>>nu;// Aqui pedimos que al usuario que ingrese su numerado y acontinuacione lo guarda a la variable nu
+  F.setn(nu);// Despues se guarda dentro de la clase fraccion ya que la llamamos mediante F.setn (el setn es parte de nuestro contrustor para guardar la variable hay )
+  cout<<"Ingrese su denominador de la Fraccion"<<endl;
+  cin>>deaux;// Aqui pedimos que al usuario que ingrese su numerado y acontinuacione lo guarda a la variable deaux
+  F.setd(deaux);// Despues se guarda dentro de la clase fraccion ya que la llamamos mediante F.setn (el setn es parte de nuestro contrustor para guardar la variable hay )
+  if(deaux!=0){// Aqui le pregunta si nuestra variable del denomidaro es igual o distinta de cero si es el caso que sea distinta igual a cero la variable de pasar a tomar el valor de la varibale deax y despues se guarda
+        de=deaux;
+    }else{
+        while(de==0){
+            cout<<"El denominador es igual a 0 profavor ingrese otra variables distinta de cero"<<endl;
+            cout<<"Ingrese nuevamente el denominador"<<endl;
+            cin>>de;
+        }
+    }
+  F.setd(de);//Guardamos la varibales dentro de la clase
+  Lista x,y;// Lista auxiliares
+    y = z;// Aqui le decimos que nuestra lista x (auxiliar) va a tener el mismo valor que la lista principal l
+    x = new(Nodo);// este proceso es el mismo que vimos en la clase para pasar al siguiente nodo 
+    x->info = F;
+    x->link = NULL;
+
+    if(y==NULL)// Este proceso es el mismo que vimos en la clase para pasar al siguiente nodo 
+        z = x;
+    else{
+        while(y->link != NULL){
+            y = y->link;
+        }
+        y->link = x;
+    }
+}
+
+void mayor(Lista &l){
+  Lista x;// Lista auxiliar 
+    Fraccion F;
+    float mayor = 0, resultado;
+    float num, den;
+    for(x=l; x!=NULL;x=x->link){// Creamos una lista auxiliar mediante x y le preguntamos al for si x es distinta o igual a vacio  y que pase al siguiente dato 
+        num=x->info.getn();// Asignamos la variable del numerador en num
+        den=x->info.getd();// Asignamos la variable del denominador en den
+        resultado=num/den;//Asigamos a la nueva variable la division del numerador y del denominador para tener nuestra resultado realizado
+        if(resultado>mayor){//Preguntamos si nuestro resultado es igual a mayor que tiene valor 0 en nuestro primera siempres va a tomar el valor de resulta pero mediante que ingresamo variable va ir cambiando mediante la division del numerador y denominador 
+            mayor=resultado;// y aqui asigamos el valor de resultado a mayor para cuando ingresemos mas variable le pregunte si es mayor a la anteriormente ejecutada 
+            F=x->info;// y aqui pasamos la informacion objeto como usted guste a F a nuestra clase 
+        }
+    }
+    cout<<"El mayor elemento de la LLS es: ";//Para poder mostrar despues 
+    F.mostrar();
+}
+
+void Contar(Lista &l){
+  Lista x;
+  int cont=0;
+  x=l;// se crea una copia de la lista l
+  while(x!=NULL){//Se nos pregunta si nuestra lista si es distinta igual a vacia (NULL) en caso que que no lo esta ya que estamos ingresando valores 
+    if(x->info.getn()< x->info.getd()){//preguntamos si el numerador es menor a denomindaor 
+      cont++;//en el caso que sea verdadero el numerador menor al denominador nuestro contador va a ir sumando 
+      x=x->link;// y pasamos al siguiente nodo para que lo haga con todas una de la fraciones 
+    }
+  }
+  cout<<"Tiene un total :"<<cont<<"que son mayores a su denominador"<<endl;//Y mostramos la cantida que posee nuestra numerador 
+}
+
+bool Primo(int num) {// Funcion que nos permitira saber si nuestro numerado es primo
+  if (num == 0 || num == 1 || num == 4) return false;// Aqui le pregunta si nuestra variable numero es igual a 0 o igual 1 o igual a 4 que viene siendo falso 
+  for (int x = 2; x < num / 2; x++) {// Y le decimos aque x toma el valor de 2 ya que lo vamos dividir en 2 y va a amunanto pero para que 
+    if (num % x == 0) return false;// Por que ahora lo dividimos para ver si el resultado es igual a 0 en caso que sea va a retornar a un falso
+  }
+  return true;// Pero en el caso contrario es verdadero
+}
+
+void PromDLLS(Lista &p){// Funcion para sacar el promedio de la lista  
+    float suma=0, resultado = 0;
+    int cont=0;
+    float promedio=0;
+    Lista x;// Lista auxiliar
+    x=p;// lista auxiliar 
+    float n, d;//Variables auxiliares
+    while(x!=NULL){// Se nos pregunta si nuestra lista auxiliar esta vacia 
+        n=x->info.getn();// Aqui asignamos el valor del numerador a la variable n (auxiliar)
+        d=x->info.getd();// Aqui asignamos el valor del denominador a la variable d (auxiliar)
+        if(Primo(n)==1){// Llamamos a la funcion de booleano y preguntamos mediante si el numerador su valor es igual a 1 en caso que si es haga la division del n con el d 
+            resultado = n/d;
+            suma = suma + resultado;// Despues asiganamos el valor a suma pero despues de ellos sumamos pero enrealidad se sumaria primeros despues se asiganar el valor pero lo explico como si fuera la primera vez del ingresar una variables despues que se agreguen mas variables van a sumares el resultado con la suma de ellos 
+            cont++;// Aqui sumamos nuestro contador
+            x=x->link;// Pasamos al siguiente nodo
+        }else{// En caso que nuestro numerador no se igual a 1 le decimos que no sirve asi que pasa al siguiente nodo ya que nosotros lo estamos haciendo los numero primos
+            x=x->link;// Pasamos al siguiente nodo
+        }
+    }
+    promedio=suma/cont;// Y por ultimo sacamos el promedio como mediante la suma y nuestra contador ya que nuestro contador nos ayudaba sacar el total de vez que se ingresaba un numero primo 
+    cout<<"El promedio de los elementos cuyo numerador es primo es: "<< promedio <<endl<<endl;// Se imprime el numero de promedio de fraccion (prima/primo) ingresada 
+}
+
+void mostrar(Lista &l){// Funcion que nos muestra los dato en la lista 
+  Lista x;
+  x=l;// Lista auxiliar 
+  int i=1; // Indicador donde se encuntra nuestra variable / Fraccion
+  while(x!=NULL){
+    cout<<"Fraccion n°`"<<i<<";"<<endl;
+    x->info.mostrar();// Muestar la informacion llamando a la misma funcion 
+    x=x->link;// Pasa al siguiente nodo
+    i++;// Y va aumentando nuesto contador para indicandolo donde se encuentra la variable
+  }
+}
+
+int main(){
+  int opc;
+  Lista L = NULL;
+  while(opc != 6){
+    cout<<"Opcion 1) Agregar una nueva fraccion a la LLS "<<endl;
+    cout<<"Opcion 2) Mostrar el contenido de la LLS"<<endl;
+    cout<<"Opcion 3) Contabilizar la LLS"<<endl;
+    cout<<"Opcion 4) Saber el elemento mayor de la LLS"<<endl;
+    cout<<"Opcion 5) Promedio de la LLS"<<endl;
+    cout<<"Opcion 6) salir"<<endl;
+    cin>>opc;
+    if(opc==1){
+      agregar(L);// Aqui llamamos a la funcion Agregar Fracciones a la lista 
+    }
+    if(opc==2){
+      mostrar(L);// Aqui llamamos la funcion mostrar para mostrar el contendio de la LLS (Lista Lineal Simple)
+    }
+    if(opc==3){
+      Contar(L);// Aqui llamamos la funcion para contabilizar la fracciones de la LLS (Lista Lineal Simple)
+    }
+    if(opc==4){
+      mayor(L); // Aqui llamamos la funcion para sacar el mayor de la fracciones de la LLS (Lista Lineal Simple)
+    }
+    if(opc==5){
+      PromDLLS(L);// Aqui llamamos la funcion para sacar el promedio de la fracciones (prima/primo) de la LLS (Lista Lineal Simple)
+    }
+    if(opc==6){
+      cout<<" Chaito Que tenga un lindo dia"<<endl;
+    }
+  }
+    return 0;
+}
+
+*/
+
+
+/* Fraccion.ccp
+
+#include "Fraccion.h"
+#include <iostream>
+Fraccion ::Fraccion(){}
+Fraccion::~Fraccion(){}
+void Fraccion::setn(int n)//Funcion donde asignamos el valor al numerador
+{
+  num=n;//variable donde vamos a guardar el numerador
+}
+void Fraccion::setd(int d)//Funcion donde asignamos el valor al denomindar
+{
+  dem=d;//Variable donde vamos a guardar el denominador
+}
+int Fraccion::getd()//Funcion donde mostrar la varibale del denominador 
+{
+  return dem;
+}
+int Fraccion::getn()//Funcion donde mostrar la varibale del numerador
+{
+  return num;
+}
+void Fraccion::mostrar()//Funcion para mostrar la informacion guardada
+{
+  cout<<"La Fraccion es: "<<num<<"/"<<dem<<endl;
+}
+
+*/
+
+
+/* Fraccion.h
+
+#ifndef FRACCION_H
+#include <iostream>
+#define FRACCION_H
+using namespace std;
+class Fraccion /*Fraccion.h*/
+{
+  private: 
+  int num;//variable para el numerador
+  int dem;//variable para el denominador
+  public:
+  Fraccion();//Constructor por defecto
+  ~Fraccion();//Desconstructor para liberar memoria ram
+    void setn (int);//Funcion donde asignamos la variable del numerador
+    void setd (int);//Funcion donde asignamos la variable del denominador
+    int getn ();//Funcion donde guardamos la variable guardada para el numerador
+    int getd ();//Funcion donde guardamos la variable guardada para el denominador
+    void mostrar();//Funcion para mostrar los datos ingresado 
+};
+#endif
+
+*/
