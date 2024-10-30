@@ -1,0 +1,84 @@
+//Ejemplo 1
+/*
+//Pila base
+#include <iostream>
+#include<stack>
+using namespace std;
+
+int main()
+{
+stack<int> S; //permite crear un stack S vacio
+//int aux;
+S.push(1); //agrega el elemento 1 en el tope del stack S
+S.push(2); //agrega el elemento 2 en el tope del stack S
+S.push(3); //agrega el elemento 3 en el tope del stack S
+cout << "Valor : " << S.top();
+}
+
+//Ingresar datos a una Pila
+#include <iostream>
+#include<stack>
+using namespace std;
+int main()
+{ int e, N;
+stack<int> S;
+cout <<"Ingrese cantidad de elementos : ";
+cin >> N;
+for(int k=0; k<N; k++)
+{
+cout << "Ingrese elemento :";
+cin >> e;
+S.push(e);
+}
+while(!S.empty())
+{
+cout <<"Último valor ingresado en el Stack:"<<S.top()<<endl;
+S.pop();
+}
+return 0;
+}
+*/
+
+
+//Ejemplo 2
+
+//Mostrar Pila Invertida
+#include <iostream>
+#include<stack>
+using namespace std;
+//Uso de funciones externas sobre un stack
+void Mostrar(stack<int> S)
+{ stack<int> AUX;
+int e;
+cout <<"Mostrar todos los elementos del Stack S" << endl;
+while(!S.empty())
+{
+e = S.top();
+cout <<"Valor = " << e << endl;
+AUX.push(e);
+S.pop();
+}
+cout<<"Mostrar todos los elementos del Stack AUX"<<endl;
+while(!AUX.empty())
+{
+e = AUX.top();
+cout <<"Valor = " << e << endl;
+AUX.pop();
+}
+
+}
+
+int main()
+{ int dato,num;
+stack<int> S;
+cout <<"Ingrese cantidad de elementos : ";
+cin >> num;
+for(int i=0; i<num; i++)
+{
+cout <<"Ingrese elemento : ";
+cin >> dato;
+S.push(dato);
+}
+Mostrar(S);
+return 0;
+}
