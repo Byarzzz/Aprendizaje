@@ -1,0 +1,152 @@
+/* Main.cpp
+
+#include "Fraccion.h"
+#include <iostream>
+using namespace std;
+struct Nodo {
+  Fraccion info;
+  struct Nodo *link;
+};
+typedef Nodo *Lista;
+void agregar(Lista &l, Fraccion value) {
+  Lista n = new (Nodo);
+  n->info = value;
+  n->link = l;
+  l = n;
+}
+void mostrar(Lista l) {
+  while (l != NULL) {
+    l->info.mostrar();
+    l = l->link;
+  }
+}
+/*funcion que van en el taller ver a mas profundida*/
+int cantidadElementosEnLaRecursiva(Lista &L) {
+  if (L == NULL)
+    return 0;
+  return 1 + cantidadElementosEnLaRecursiva(L->link);
+}
+/*int promedioRecursiva(Lista L, int suma,int cantidad){
+  if(L!=NULL){
+    promedioRecursiva(L->link,suma+L->valoracion,cantidad+1);
+  }else{
+    return suma/cantidad;
+  }
+}*/
+/*int sumarListaRecursivamente(Lista &L){
+  if(L==NULL)
+    return 0;
+  else
+    return L->info + sumarListaRecursivamente(L->link);
+}*/
+/*int promedioRecursivamente(Lista &L){
+  if(L==NULL)
+    return 0;
+  else
+    return (L->info +
+sumarListaRecursivamente(L->link))/cantidadElementosEnLaRecursiva(L);
+}*/
+
+int main() {
+  Lista L = NULL;
+  Fraccion f1, f2, f3;
+  int d, n, n1 = 0, d1 = 0, fra = 0;
+  while (fra != 3) {
+    cout << "ingrese mediante los numero que fraccion quiere ingresar su datos"
+         << endl;
+    cin >> fra;
+    if (fra == 1) {
+      cout << "ingrese su numerador" << endl;
+      cin >> n;
+      cout << "ingrese su denominador" << endl;
+      cin >> d;
+      f1.setn(n);
+      f1.setd(d);
+      agregar(L, f1);
+    } else if (fra == 2) {
+      cout << "ingrese su numerador" << endl;
+      cin >> n;
+      cout << "ingrese su denominador" << endl;
+      cin >> d;
+      f2.setn(n);
+      f2.setd(d);
+      agregar(L, f2);
+    } else if (fra == 3) {
+      cout << "ingrese su numerador" << endl;
+      cin >> n;
+      cout << "ingrese su denominador" << endl;
+      cin >> d;
+      f3.setn(n);
+      f3.setd(d);
+      agregar(L, f3);
+    } else {
+      cout << "La variable ingresada no concuerda con la opciones mostrada"
+           << endl;
+    }
+  }
+  cout << "******* Lista de Fracciones ***" << endl;
+  mostrar(L);
+
+  return 0;
+}
+
+*/
+
+/*Fraccion.ccp
+
+#include "Fraccion.h"
+#include <iostream>
+using namespace std;
+Fraccion::~Fraccion()
+{
+  /* Hola*/
+}
+Fraccion ::Fraccion()
+{
+  num =0;
+  dem= 0;
+}
+void Fraccion::setn(int n)
+{
+  num=n;
+}
+void Fraccion::setd(int d)
+{
+  dem=d;
+}
+int Fraccion::getd()
+{
+  return dem;
+}
+int Fraccion::getn()
+{
+  return num;
+}
+void Fraccion::mostrar()
+{
+  cout<<"La Fraccion es: "<<num<<"/"<<dem<<endl;
+}
+*/
+
+/*Fraccion.h
+
+#ifndef FRACCION_H
+#include <iostream>
+#define FRACCION_H
+class Fraccion /*Fraccion.h*/
+{
+  private: 
+  int num;
+  int dem;
+  public:
+  Fraccion();
+  ~Fraccion();
+  //Fraccion(const Fraccion&);// definir constrtuctor copia como se va a llamar la copia const es parte de la instruccion 
+    void setn (int);
+    void setd (int);
+    int getn ();
+    int getd ();
+    void mostrar ();
+};
+#endif FRACCION_H
+*/
