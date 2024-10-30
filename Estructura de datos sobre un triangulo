@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Triangulo
+{
+private:
+int lado1, lado2 , bajo;
+
+public:
+Triangulo ();
+~Triangulo ();
+void setAsignar(int, int, int );
+void getMostrar();
+int getPerimetro ();
+int getArea();
+};
+
+Triangulo::Triangulo()
+{}
+Triangulo::~Triangulo()
+{}
+void Triangulo::setAsignar(int a, int b ,int c)
+{
+  lado1=a;
+  lado2=b;
+  bajo=c;
+}
+
+void Triangulo::getMostrar()
+{
+  cout<< "los lados son: " << lado1 << " y " << lado2 <<" y el bajo es "<<bajo<<endl;
+}
+int Triangulo::getPerimetro()
+{
+  return bajo+(lado1*lado2);
+}
+int Triangulo::getArea()
+{
+  return (bajo * lado1)/2;
+}
+
+int main() {
+  Triangulo t;
+  int x,y,z;
+  cout<<"Ingrese los 2 lados y la base en ese orden" <<endl;
+  cin>>x;
+  cin>>y;
+  cin>>z;
+  t.setAsignar(x,y,z);
+  t.getMostrar();
+  cout<< "El Perimetro "<< t.getPerimetro()<<endl;
+  cout<< " El Area es "<< t.getArea()<<endl;
+  return 0;
+}
