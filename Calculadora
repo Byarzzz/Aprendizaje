@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+void suma (int  , int );
+void resta (int  , int );
+void multiplicacion (int  , int );
+void division (int  , int );
+void espar (int , int);
+
+int main() {
+  setlocale(LC_CTYPE,"Spanish");
+    int a , b;
+    cout << " Introduce un numero :";
+    cin >> a;
+    cout << " Introduce un numero :";
+    cin >> b;
+    cout << endl;//Esto es un Salto de linea 
+
+    int op = 0;
+    while (op !=4){
+
+    cout << "_________________________________________________________________"<< endl;
+    cout << "___Calculadora no cientifica_____________________________________"<< endl;
+    cout << "(Opcion 1 ) Leer 2 numero y sumarlo______________________________"<< endl;
+    cout << "(Opcion 2 ) Leer 2 numero y restarlo_____________________________"<< endl;
+    cout << "(Opcion 3 ) Leer 2 numero y division_____________________________"<< endl;
+    cout << "(Opcion 4 ) Leer 2 numero y multiplicacion_______________________"<< endl;
+    cout << "(Opcion 5 ) Leer 2 numero y saber si es par _____________________"<< endl;
+    cout << "(Opcion 6 ) Salir________________________________________________"<< endl;
+    cin >> op;
+
+      if (op == 1){
+        suma (a,b);
+      }
+
+      if (op == 2){
+        resta (a,b);
+      }
+
+      if (op == 3){
+        division (a,b);
+      }
+
+      if (op == 4){
+        multiplicacion (a,b);
+      }
+      if (op == 5){
+        espar (a,b);
+      }
+      if (op==6){
+        return 0;
+      }
+    } 
+    return 0;
+}
+
+void suma (int x , int y){
+   int z; 
+  z = x + y ; 
+  cout << "la suma es : " << z << endl;
+}
+void resta (int x , int y){
+   int z;
+  z = x - y ;
+  cout << "la resta es : " << z << endl;
+}
+void division (int x , int y){
+  int z; 
+  z = x / y ;
+  cout << "la division es : " << z << endl;
+}
+void multiplicacion (int x , int y){
+  int z;
+  z = x * y ; 
+  cout << "la multiplicacion es : " << z << endl;
+}
+void espar (int x , int y){
+  int z;
+  z = x + y;
+  if (z % 2 == 0){
+  cout << " La suma de los 2 numero es par "<< endl;
+    }
+  else
+  cout << " la suma de los 2 numero no es par "<< endl;
+}
