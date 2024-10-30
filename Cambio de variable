@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+void intercambio (int & , int &);
+
+int main() {
+  setlocale(LC_CTYPE,"Spanish");
+    int a , b;
+    cout << " Introduce un numero :";
+    cin >> a;
+    cout << " Introduce un numero :";
+    cin >> b;
+    cout << endl;
+    cout << "El valor de : a  " << a << "valor de b :" << b << endl;
+    intercambio (a,b);
+    cout << endl << "Despues del intercambio : " << endl << endl; 
+    cout <<" el valor de a : "<< a << " el valor de b: " << b << endl;
+    return 0;
+}
+
+void intercambio (int &x , int &y){
+  int z ;
+  z = x ; 
+  x = y;
+  y = z;
+}
