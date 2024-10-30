@@ -1,0 +1,23 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main() {
+  queue <int> cola;
+  int n=0,c=0,i=1;
+  cout<<"ingrese la cantidad de dato que va a ingresar:"<<endl;
+  cin>>c;
+  for(i=1;i<=c;i++)
+    {
+      cout<<"ingrese datos:"<<endl;
+      cin>>n;
+      cola.push(n);
+    }
+  cout<<"informacion de la cola"<<endl;
+  while( !cola.empty())
+    {
+      cout<<cola.front()<<endl;
+      cola.pop();
+    }
+  return 0;
+}
