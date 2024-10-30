@@ -1,0 +1,197 @@
+#include <iostream>//biblioteca que vamos a utilizar 
+#include <stdlib.h>
+#include <string.h>
+#include <string>
+using namespace std;
+struct Nodo{//creacion de nuestro arbol
+string dato;
+Nodo *izq;
+Nodo *der;
+int repetidas=1;
+};
+struct Letra{//creacion del nodo 
+Nodo *arbol;
+char letramax;
+char letramin;
+int cantidad;
+
+};
+Nodo *CrearNodo(string n){//creacion del nodo que funciona mediante punteros 
+  Nodo *nuevo_nodo= new Nodo();
+  nuevo_nodo->der=NULL;// como se va a distribuir la informacion ingresada
+  nuevo_nodo->der=NULL;
+  nuevo_nodo->dato=n;
+  return nuevo_nodo;
+}
+bool Busqueda(Nodo *arbol, string n)//distribucion al buscar las variable del arbol 
+{
+  if(arbol==NULL)// si nuestro arbol esta vacion 
+    return false;// entone que devuelve falso 
+  else if(arbol->dato==n)//pero si no arbol apunta a un dato == al valor n(valor ingreaso)
+    return true;// entonce que devuelva un verdadero  
+    else if(arbol->dato > n)//Pero si arbol es mayor que n 
+      return Busqueda(arbol->izq, n);//entonce que llame la funcion busqueda y comienze por su lado izquierdo 
+  else // si no
+   return Busqueda(arbol->der, n);// que lo haga por el lado derecho
+  
+}
+void Repetir(Nodo *arbol, string n){//funcion para ver si el dato ingresado esta repetido 
+    if(arbol->dato==n)// si arbol apuntado a dato es == a n (valor ingresado)
+    {
+      arbol->repetidas++;//arbol apuntando a repetidas va a sumar el contador 
+      return;
+    }
+    else if(arbol->dato>n)//en el caso de que arbol apuntado a dato el dato n sea menor a dato entonce 
+    {
+      return Repetir(arbol->izq, n);//devuelve el valor de la izquierda 
+    }
+      else return Repetir(arbol->der, n);//en el caso contrario devuelve el valor de la derecha
+      }
+void Insertar(Nodo *&arbol, string n)
+{
+  if(Busqueda(arbol, n))
+  {
+    Repetir(arbol, n);
+  }
+  if(arbol==NULL)// si arbol == a vacio entonce 
+    arbol=CrearNodo(n);//arbol va a tener el valor de crearnodo
+  else{//sino 
+     string valor_raiz=arbol->dato;// el valor de datos va a ser copiado en el valor de la raiz 
+    if(valor_raiz>n)// si el valor raiz es mayor al valor ingresado 
+      Insertar(arbol->izq,n );// va a ser ingresado por la izquierda 
+    if (valor_raiz<n)//si el valor de raiz es menor que n entonce
+      Insertar(arbol->der, n);//va a ser ingresado en la derecha 
+  }
+}
+Letra ABC[27];//vector de capacida de 27 
+void Inicializar(Letra ABC[])//funcion para inicialir el diccionario 
+{
+  int max=65;//variables que vamos a utilizar 
+  int min=97;//variables que vamos a utilizar 
+  for(int i=0; i<27; i++)// hacemos un recorrido por todo el vector 
+    {
+      ABC[i].arbol=NULL;// aqui decimos que nuestro arbol esta vacio 
+      ABC[i].letramax= max;// aqui despues pasamos la palabra ingresa con el dato de 65
+      ABC[i].letramin=min;// y aqui con el valor de 97
+      ABC[i].cantidad=0;
+      max++;
+      min++;
+    }
+  
+}
+void InsertarPalabra(Letra ABC[]){//funcion para ingresar nuestra palabra del diccionario 
+  string palabra;//varibale que vamos a utlizar 
+  cout<<"Ingrese la palabra: "<<endl;//pedimos ingresar la plabra 
+  fflush(stdin);
+  cin>>palabra;//guardamos la variables ingresada palabra 
+  string aux1;//declaramos nuestra variables que vamos a utilizar 
+  string aux2;
+  string k;
+  k=palabra[0];// aqui asigamos a k a la variable de la palabra ingresada 
+  for(int i=0; i<27;i++)//hacemos un recorrido por todo el vector 
+    {
+      aux1=ABC[i].letramin;
+      aux2=ABC[i].letramax;
+      if(k==aux1 || k==aux2)//si k es == a axu1 o k == aux2 entonce
+      {
+        Insertar(ABC[i].arbol, palabra);//llamamos a la funcion de insertar 
+        ABC[i].cantidad++;
+      }
+    }
+  
+  
+}
+  void InOrden(Nodo *arbol){//funcion void para ordernar
+  if(arbol==NULL)// si arbol es igual a vacio
+    return;//entonce no devuelve nada 
+  else{// pero si no entonce 
+    InOrden(arbol->izq);//llamamos a la funcion y le decimos que apunte al valor de la izquierda del arbol 
+    cout<<arbol->dato<<endl;// y mostramos un mensaje por pantalla con el dato del arbol 
+    InOrden(arbol->der);// y despues lo mismo con la derecha 
+  }
+}
+
+void InOrdenRepetidas(Nodo *arbol){// funcion void para ver ordenar la repetidas 
+  if(arbol==NULL)//si arbol igual a vacio 
+  {
+    return;// no devolvemos nada 
+  }
+  else{//si no 
+    InOrdenRepetidas(arbol->izq);//llamamos al a y apuntamos a valor de la izquierda 
+    if(arbol->repetidas>1)//si arbol apuntado a repetidas es mayor a 1 entonce 
+      cout<<arbol->dato<< " se repite "<<arbol->repetidas<<" veces"<<endl;// mostramos por mensaje en la pantalla el dato que se repite con su cantida de veces
+    InOrdenRepetidas(arbol->der);// y hacemo los mismo con la derecha
+  }
+}
+void BuscarRepetida(Nodo *arbol, string n)//funcion para buscar repetido con el nodo puntero de arbol y la varibale n ingresada  
+{
+  
+    if(arbol==NULL)//si arbol == vacion entonce 
+    {
+      return;// no devuelve nada
+    }
+    else{// si no entonce 
+      BuscarRepetida(arbol->izq, n);//llamamos a al funcion de busvar reperido y apunta d valor de la izquier y preguntamos 
+      if(arbol->dato==n)// si el valor del dato del arbol es igual  n entonce
+        cout<<arbol->dato<<" se repite"<<arbol->repetidas<<" veces."<<endl;// mostramo por pantalla el arbol el dato y le informamos que se repite y mostramos nuestro repetidas para mostrar la cantidad de veces
+      BuscarRepetida(arbol->der, n);// aqui pasamos con el lado derecho 
+    }
+  
+    
+}
+void menu()// menu para incialializar las funcion cuando sea seleccionada 
+{
+  int opc;//variable donde vamos a elegir las opciones del menu 
+  string repetida;//nuestro cojunto de palabra 
+  int confirmacion=0;
+do{
+  cout<<"Ingrese una opcion: "<<endl;
+  cout<<"1. Inicializar un diccionario"<<endl;//funcion como iniciar el diccionario
+  cout<<"2. Agregar una palabra al Diccionario"<<endl;// funcion para un palabra al diccionario
+  cout<<"3. Mostrar el diccionario"<<endl;// funcion para mostrar el diccionario
+  cout<<"5. Comprobar si una palabra se encuentra repetida"<<endl;
+  cout<<"6. Mostrar Palabras repetidas"<<endl;
+  cin>>opc;
+  switch(opc){// llamamos la funcion con switch que funciona lo mismo con un while pero funcion como un if por ejemplo si ingresamos un 1 en el opc entonce el programa va a decir que caso tener y va a ver todo los caso que tenemos 
+    case 1: Inicializar(ABC);//Y como vemos aca aqui se cumple la condiccion ingresada 
+    break;// Esto es un time out(tiempo fuera ) me refiero a que el programa se pausa por un momento para optimizar el programa 
+    fflush(stdin);
+    case 2: InsertarPalabra(ABC);//agregar una palabra diccionario 
+    break;//salimos del switch
+    case 3:// Aqui ocurre lo mismo pero con la variable cuando es 3  pero aqui lo que hacemos es un recorrido en vector ya que como sabemos nuestro dicionario esta ingresado en vector por eso el for para poder ingresar al vector y hacer su recorrido para hacer la funcion 
+    for(int i=0; i<27;i++)
+      {
+        InOrden(ABC[i].arbol);//Que la funcion es mostrar lo contenido del vector (diccionario)
+      }
+    break;//salimos del switch
+    case 5://comprobar si la palabra se repite 
+      confirmacion=0;//variable que vamos a utilizar
+      fflush(stdin);
+      cin>>repetida;// guardamos la ingormacion en repetidas 
+      for(int o=0; o<27; o++)// y hacemos un recorido por el vector auxiliar 
+        {
+          if (Busqueda(ABC[o].arbol, repetida))// si arbol esta repetido entonce sumamos a nuestro contador de confirmacion
+            confirmacion++;
+        }
+      if(confirmacion==1){// si nuestro contador es igual == 1 
+    for(int j=0;j<27;j++)//hacemos un recorido por el vector 
+      {
+        BuscarRepetida(ABC[j].arbol, repetida);// y llamamos a la misma funcion 
+      }}
+      else{// en el caso que no se cumpla entonce 
+        cout<<"No está registrada en el diccionario la palabra que busca."<<endl;// mostramos un mensaje en pantalla de que no se a registrado en el diccionario la palabra que busca 
+      }
+    break;//salimos del switch
+    case 6:// mostrar palabra repetidas 
+    for(int k=0; k<27; k++)// hacemos un recorido por el vector k 
+      {
+        InOrdenRepetidas(ABC[k].arbol);//y llamamos la funcion con el arbol
+      }
+    break;
+  }
+  
+}while(opc!=4);  
+  }
+int main() {
+  menu();// Llamamos el menu 
+}
