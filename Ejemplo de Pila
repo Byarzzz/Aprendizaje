@@ -1,0 +1,42 @@
+#include <iostream>
+#include <stack>// biblioteca de pila
+#include <queue>// biblioteca de pila 
+#include <stdlib.h>
+#include <string>
+
+using namespace std;
+int main() {
+  
+  stack<char> pila;
+  queue<int> cola;
+  string nombre;
+  string car = "z";
+  int c = 0, i = 0, aux = 0;
+
+  cout << "Ingrese cadena: ";
+  getline(cin, nombre);
+  cout << "Usted ingreso, " << nombre << "! \n";
+  c = nombre.length();
+  cout << "Largo del string: " << c << endl;
+  
+  while (i < c) {
+    car = nombre[i];
+    aux = nombre[i];
+    if (aux <= 57 && aux >= 48)
+    {
+      aux = atoi(car.c_str());
+      cola.push(aux);
+      }
+      pila.push(aux);
+    i++;
+  }
+   while (!cola.empty()) {
+    cout << cola.front() << endl;
+    cola.pop();
+  }
+  while (!pila.empty()) {
+    cout << pila.top() << endl;
+    pila.pop();
+  }
+  return 0;
+  }
